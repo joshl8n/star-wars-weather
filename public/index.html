@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)file:///home/josh/Documents/web-app-ii/vue-hw/static/index.html? -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+  <title>Star Wars Weather</title>
+  <meta name="author" content="Josh Layton">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <div id="grid" v-bind:style="bgStyle">
+    <div id="search">
+
+      <form @submit.prevent="sendCity">
+        <a type="button" @click="getLocation"><span class="material-icons">location_on</span></a>
+        <div class="shadow">
+          <input v-model="city" type="text" placeholder="City name"></input>
+          <a type="submit" @click="sendCity"><span class="material-icons">search</span></a>
+        </div>
+      </form>
+      <div id="weather">
+        <section id="icon">
+          <img :src="weather.icon" align="left">
+        </section>
+        <section id="data">
+          <span id="temp">{{ weather.temp }}</span>
+          <span id="city">{{ weather.city }}</span>
+          <!--<div id="humidity">{{ weather.humidity}}</div>-->
+        </section>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li v-for="planet in planets" :key="planet.name" @click="manualChange(planet.name)">
+          {{ planet.name }}
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <section class="container">
+
+      </section>
+      <section class="middle">
+        <div class="title">{{ currentPlanet }}</div>
+        <div id="getLocation" v-if="noLocation"><button type="button" @click="getLocation">Get location</button></div>
+      </section>
+      <section class="right">
+
+        <div class="description">{{ currentDescr }}</div>
+      </section>
+
+
+
+    </main>
+    <footer>
+      <div id="copyright" v-if="weather.weather !== null">Last updated {{ lastUpdate }} seconds ago.</div>
+    </footer>
+
+  </div>
+
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script src="js/app.js"></script>
+
+
+</body></html>
